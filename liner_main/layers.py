@@ -2,7 +2,6 @@ import tensorflow as tf
 import numpy as np
 import config as Con
 
-
 def conv2d(name, input, dim, bn=True, is_pooling=False):
     filter_w = tf.Variable(tf.random_normal([Con.FILTER_SIZE, Con.FILTER_SIZE, input.get_shape().as_list()[3], dim],
                                             stddev=Con.CONV2D_STDDEV), name=name)
