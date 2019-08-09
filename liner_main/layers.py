@@ -132,7 +132,7 @@ class layers():
                                    stddev=Con.CONV2D_STDDEV), name=name)
         conv = self._tf.nn.conv2d(input, filter_w, strides=[1, 1, 1, 1], padding="SAME")
 
-        # conv = self._tf.nn.sigmoid(conv)
+        conv = self._tf.nn.sigmoid(conv)
 
         print("[{}] : {}".format(name, conv.get_shape().as_list()))
         return conv

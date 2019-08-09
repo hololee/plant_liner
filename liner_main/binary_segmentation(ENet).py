@@ -36,19 +36,19 @@ with tf.Session() as sess:
         print("=================[epoch start : {}]=================".format(i + 1))
 
         for j in range(len(images) // Con.BATCH_SIZE):
-            net.train_network(np.reshape(images[j], [Con.BATCH_SIZE, 360, 640, 3]),
-                              np.reshape(labels[j], [Con.BATCH_SIZE, 360, 640, 1]))
+            net.train_network(np.reshape(images[j:j + Con.BATCH_SIZE], [Con.BATCH_SIZE, 360, 640, 3]),
+                              np.reshape(labels[j:j + Con.BATCH_SIZE], [Con.BATCH_SIZE, 360, 640, 1]))
             # print("\r[batch{}] :".format(j + 1))
 
-            loss_val = net.calculate_binary_loss(np.reshape(images[j], [Con.BATCH_SIZE, 360, 640, 3]),
-                                                 np.reshape(labels[j], [Con.BATCH_SIZE, 360, 640, 1]))
+            loss_val = net.calculate_binary_loss(np.reshape(images[j:j + Con.BATCH_SIZE], [Con.BATCH_SIZE, 360, 640, 3]),
+                                                 np.reshape(labels[j:j + Con.BATCH_SIZE], [Con.BATCH_SIZE, 360, 640, 1]))
             sys.stdout.write("\r[batch{} loss] :{}".format(j + 1, loss_val))
             if j == len(images) // Con.BATCH_SIZE - 1:
                 sys.stdout.write('\n')
 
         print("=================[epoch   end : {}]=================".format(i + 1))
 
-        predict = net.calculate_prediction(np.reshape(images[0], [Con.BATCH_SIZE, 360, 640, 3]))
-        predict = np.reshape(predict, [360, 640])
-        plt.imshow(predict, cmap='gray', vmin=0, vmax=255)
+        predict = net.calculate_prediction(np.reshape(images[0:2], [2, 360, 640, 3]))
+        predict = np.reshape(predict, [2, 360, 640])
+        plt.imshow(predict[0], cmap='gray', vmin=0, vmax=255)
         plt.show()

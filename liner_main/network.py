@@ -74,11 +74,11 @@ class MultiNet:
         layer = layers.final_layer("final", layer)
 
         self._binary_logit = layer
-        self._loss = self._tf.reduce_mean(self._tf.nn.sigmoid_cross_entropy_with_logits(labels=self._label_placeholder,
-                                                                                        logits=self._binary_logit))
-
-        # self._loss = self._tf.reduce_mean(self._tf.nn.softmax_cross_entropy_with_logits(labels=self._label_placeholder,
+        # self._loss = self._tf.reduce_mean(self._tf.nn.sigmoid_cross_entropy_with_logits(labels=self._label_placeholder,
         #                                                                                 logits=self._binary_logit))
+
+        self._loss = self._tf.reduce_mean(self._tf.nn.softmax_cross_entropy_with_logits(labels=self._label_placeholder,
+                                                                                        logits=self._binary_logit))
 
         self._optimizer = self._tf.train.AdamOptimizer(learning_rate=rate).minimize(self._loss)
         # self._optimizer = self._tf.train.MomentumOptimizer(learning_rate=rate, momentum=0.9).minimize(self._loss)

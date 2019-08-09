@@ -13,7 +13,7 @@ INITIAL_STDDEV =  0.01
 
 #####################
 # batch_size
-BATCH_SIZE = 1
+BATCH_SIZE = 2
 # epoch
 TOTAL_EPOCH = 120
 # learning_rate
